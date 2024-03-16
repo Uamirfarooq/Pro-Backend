@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import Registeruser from './routes/user.routes.js'
 
 const app = express()
 // for handleing request
@@ -23,5 +24,6 @@ app.use(express.static("public"))
 // for handling cookies
 app.use(cookieParser())
 
+app.use("/api/v1/users", Registeruser)
 
 export default app
