@@ -1,4 +1,4 @@
-import mongoose ,{Schema, model} from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -29,28 +29,27 @@ const userSchema = new Schema({
         type: String,
     },
     password: {
-        type: [String, 'Password is required'],
-        required: true,
+        type: String,
+        required: [true, 'Password is required']
     },
     refreshToken: {
         type: String,
-        required: true,
     },
     watchHistory: {
         type: Schema.Types.ObjectId,
         ref: "Video"
     }
-},{timestamps: true});
+}, { timestamps: true });
 
-userSchema.pre('save', async function(next){
+userSchema.pre('save', async function (next) {
 
-    if(!this.isModified('password')) return next();
+    if (!this.isModified('password')) return next();
 
     this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
-userSchema.methods.isPasswordCorrect = function(password){
+userSchema.methods.isPasswordCorrect = function (password) {
     return bcrypt.compare(password, this.password)
 }
 
@@ -66,7 +65,7 @@ userSchema.methods.genrateAccessToken = function () {
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
-        
+
     )
 }
 userSchema.methods.genrateRefreshToken = function () {
@@ -78,8 +77,8 @@ userSchema.methods.genrateRefreshToken = function () {
         {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
-        
+
     )
 }
 
-export const User = model('User',userSchema)
+export const User = model('User', userSchema)
