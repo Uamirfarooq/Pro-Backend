@@ -4,12 +4,10 @@ dotenv.config({
 });
 import DB_connect from "./db/index.js";
 import app from "./app.js";
-import home from "./controllers/home.js";
-import jokesApi from "./controllers/jokes.js";
+
 
 DB_connect().then(() => {
-    app.get("/", home);
-    app.get("/api/jokes", jokesApi);
+
     app.listen(process.env.PORT, () => {
       console.log(`your App is Runnig At PORT  ${process.env.PORT}`);
     });
