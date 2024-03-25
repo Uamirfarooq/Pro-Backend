@@ -229,18 +229,18 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { currentPassword, newPassword } = req.body;
-    const currentUser = req.user;
+    const user = req.user;
 
-    console.log("pass", currentUser);
-    const pass = await currentUser.isPasswordCorrect(currentPassword)
+    console.log("pass", user);
+    const pass = await user.isPasswordCorrect(currentPassword)
 
     if (!pass) {
         throw new ApiError(401, "Current password is incorrect")
     }
 
-    currentUser.password = newPassword
+    user.password = newPassword
 
-    const userWithPass = await currentUser.save({validateBeforeSave: false})
+    const userWithPass = await user.save({validateBeforeSave: false})
         
 
         if(!userWithPass){
