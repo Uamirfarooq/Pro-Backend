@@ -232,11 +232,15 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     const user = req.user;
 
     console.log("pass", currentPassword);
-    const pass = await user.isPasswordCorrect(currentPassword)
-
-    if (!pass) {
-        throw new ApiError(401, "Current password is incorrect")
+    try {
+        await user.isPasswordCorrect(currentPassword)
+    } catch (error) {
+        console.log(error);
     }
+
+    // if (!pass) {
+    //     throw new ApiError(401, "Current password is incorrect")
+    // }
 
     user.password = newPassword
 
