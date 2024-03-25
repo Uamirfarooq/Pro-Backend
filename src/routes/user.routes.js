@@ -1,6 +1,6 @@
 import express from "express";
 import { upload } from "./../middleware/multer.middleware.js"
-import { changeCurrentPassword, deleteUser, loginUser, logoutUser, refreshAccessToken, updateUserDetails, userRegister } from "../controllers/user.controller.js";
+import { changeCurrentPassword, deleteUser, getCurrentUser, loginUser, logoutUser, refreshAccessToken, updateUserDetails, userRegister } from "../controllers/user.controller.js";
 import { veryfyJWT } from "../middleware/verifyJWT.middleware.js";
 
 const router = express();
@@ -43,5 +43,7 @@ router.route("/update-user").post(upload.fields([
         maxCount: 1
     }
 ]),veryfyJWT,updateUserDetails)
+
+router.route("/get-user-details").get(veryfyJWT,getCurrentUser)
 
 export default router
