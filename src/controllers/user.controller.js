@@ -295,7 +295,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     existedUser.avatar = avatar;
     existedUser.coverImage = coverImage;
 
-    const newUser = existedUser.save({validateBeforeSave: false})
+    const newUser = existedUser.save()
 
     if (!newUser) {
         throw new ApiError(409, "User is not modifyed")
@@ -331,6 +331,7 @@ const updateAvatar = asyncHandler(async(req, res) => {
         new ApiResponce(201,"Avatar is Updated Succesfully",{UpdatedUser})
     )
 })
+
 const updateCoverImage = asyncHandler(async(req, res) => {
     const user = req.user
 
