@@ -231,7 +231,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { currentPassword, newPassword } = req.body;
     const user = req.user;
 
-    console.log("pass", user);
+    console.log("pass", currentPassword);
     const pass = await user.isPasswordCorrect(currentPassword)
 
     if (!pass) {
