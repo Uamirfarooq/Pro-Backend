@@ -292,8 +292,8 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     existedUser.email = email;
     existedUser.fullName = fullName;
     existedUser.password = password;
-    existedUser.avatar = avatar;
-    existedUser.coverImage = coverImage;
+    existedUser.avatar = avatar.url;
+    existedUser.coverImage = coverImage.url;
 
     const newUser =await existedUser.save()
 
