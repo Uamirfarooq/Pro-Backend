@@ -12,7 +12,7 @@ export const veryfyJWT = asyncHandler(async (req, _, next) => {
 
     const decodedToken = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET)
 
-    const user = await User.findById(decodedToken._id)
+    const user = await User.findById(decodedToken._id).select("-password -refreshToken")
 
     req.user = user
 
