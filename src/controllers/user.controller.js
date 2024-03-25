@@ -288,7 +288,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
-    existedUser.password = password;
+    existedUser.username = username;
     existedUser.email = email;
     existedUser.fullName = fullName;
     existedUser.password = password;
